@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
         myRigidbody.MovementLerpWeight = MovementLerpWeight;
     }
 
+    bool reset = false;
+
     void Update()
     {
         float x = Input.GetAxisRaw("Horizontal");
@@ -24,7 +26,17 @@ public class PlayerController : MonoBehaviour
 
         //myRigidbody.velocity = Vector2.Lerp(myRigidbody.velocity, new Vector2(x, y).normalized * MovementSpeed, MovementLerpWeight);
         myRigidbody.velocity = new Vector2(x, y).normalized * MovementSpeed;
+        if(reset)
+            myRigidbody.velocity = Vector2.zero;
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            print("RESETING");
+            reset = false;
+            MyUtils.Time.SetTimeout(() => {
+                reset = false;
+            }, 0.2f, this);
+        }
 
     }
 }
