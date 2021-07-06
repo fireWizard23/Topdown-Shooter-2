@@ -9,6 +9,7 @@ public class RigidbodyController : MonoBehaviour
 
     private Rigidbody2D myRigidbody;
     public Rigidbody2D Rigidbody => myRigidbody;
+    public float MovementLerpWeight = 0.1f;
 
     private void Start()
     {
@@ -18,6 +19,8 @@ public class RigidbodyController : MonoBehaviour
     void FixedUpdate()
     {
         if (velocity != null)
-            Rigidbody.velocity = velocity;
+        {
+            myRigidbody.velocity = Vector2.Lerp(myRigidbody.velocity, velocity, MovementLerpWeight);
+        }
     }
 }

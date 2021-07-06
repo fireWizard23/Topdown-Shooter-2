@@ -233,6 +233,11 @@ public class MyUtils : MonoBehaviour
                 return mousePos;
             }
         }
+        public static Vector2 GetMouseDirection(Vector3 toPoint)
+        {
+            return ((Vector2)(GetMouseWorldPosition() - toPoint)).normalized;
+        }
+
         /// <summary>
         /// Returns the Vector3 World Scaled position of the mouse
         /// </summary>
