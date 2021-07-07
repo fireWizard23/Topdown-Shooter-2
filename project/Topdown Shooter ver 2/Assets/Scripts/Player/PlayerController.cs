@@ -25,8 +25,6 @@ public class PlayerController : MonoBehaviour
     {
         currentState = GetNewState();
         DoStateLogic();
-        print(currentState);
-
 
         if (Input.GetMouseButtonDown(0))
         {
