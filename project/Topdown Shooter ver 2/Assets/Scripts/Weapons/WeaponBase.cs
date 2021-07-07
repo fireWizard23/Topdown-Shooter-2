@@ -6,7 +6,7 @@ public abstract class WeaponBase : MonoBehaviour
 {
     public Type type = Type.Melee;
 
-
+    public abstract void Attack();
 
 }
 

@@ -8,18 +8,34 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float MovementSpeed = 5f;
     [SerializeField] private float MovementLerpWeight = 0.15f;
-
     public enum States { Idle, Walking, InKnockback, Attacking}
     private States currentState = States.Idle;
 
     private RigidbodyController myRigidbody;
 
+    private WeaponPickuper weaponPickuper;
+
     void Start()
     {
         myRigidbody = GetComponent<RigidbodyController>();
+        weaponPickuper = GetComponent<WeaponPickuper>();
         myRigidbody.MovementLerpWeight = MovementLerpWeight;
+
+        weaponPickuper.OnWeaponEnter += OnWeaponEnter;
+
     }
 
+    private void OnDestroy()
+    {
+        weaponPickuper.OnWeaponEnter -= OnWeaponEnter;
+    }
+
+
+    private void OnWeaponEnter(WeaponBase weapon)
+    {
+        print(weapon.type);
+
+    }
 
     void Update()
     {

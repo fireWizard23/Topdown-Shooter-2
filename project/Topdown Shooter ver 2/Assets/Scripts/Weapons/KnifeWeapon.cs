@@ -1,9 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class KnifeWeapon : WeaponBase
 {
+
+    public override void Attack()
+    {
+        print("MELEE ATTACKING WITH KNIFE!");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +22,5 @@ public class KnifeWeapon : WeaponBase
         
     }
 
-    
 
 }

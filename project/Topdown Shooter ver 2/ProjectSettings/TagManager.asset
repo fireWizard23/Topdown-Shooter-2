@@ -11,16 +11,16 @@ TagManager:
   - 
   - Water
   - UI
+  - Player
   - 
+  - Friendly_NPC
+  - Hostile_NPC
   - 
+  - Friendly_Attack
+  - Hostile_Attack
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - World
+  - Objects
   - 
   - 
   - 
