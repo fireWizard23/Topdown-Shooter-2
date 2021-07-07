@@ -21,11 +21,6 @@ public class RigidbodyController : MonoBehaviour
         if (velocity != null)
         {
             myRigidbody.velocity = Vector2.Lerp(myRigidbody.velocity, velocity, MovementLerpWeight);
-            if (myRigidbody.velocity.sqrMagnitude <= 0.1f * 0.1f)
-            {
-                myRigidbody.velocity = Vector2.zero;
-                return;
-            }
-        } 
+        }
     }
 }
