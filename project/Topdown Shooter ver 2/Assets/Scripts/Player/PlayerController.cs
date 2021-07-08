@@ -13,28 +13,33 @@ public class PlayerController : MonoBehaviour
 
     private RigidbodyController myRigidbody;
 
+    //private WeaponNoticer weaponPickuper;
     private WeaponPickuper weaponPickuper;
+    private InventoryComponent inventoryComponent;
 
     void Start()
     {
         myRigidbody = GetComponent<RigidbodyController>();
+        inventoryComponent = GetComponent<InventoryComponent>();
         weaponPickuper = GetComponent<WeaponPickuper>();
+
+        //weaponPickuper = GetComponent<WeaponNoticer>();
         myRigidbody.MovementLerpWeight = MovementLerpWeight;
-
-        weaponPickuper.OnWeaponEnter += OnWeaponEnter;
+        //// Subscribe
+        //weaponPickuper.OnWeaponEnter += OnWeaponEnter;
 
     }
 
-    private void OnDestroy()
-    {
-        weaponPickuper.OnWeaponEnter -= OnWeaponEnter;
-    }
+    //private void OnDestroy()
+    //{
+        // Unsubscribe
+      //  weaponPickuper.OnWeaponEnter -= OnWeaponEnter;
+    //}
 
 
     private void OnWeaponEnter(WeaponBase weapon)
     {
-        print(weapon.type);
-
+        print(weapon != null);
     }
 
     void Update()
@@ -42,13 +47,10 @@ public class PlayerController : MonoBehaviour
         currentState = GetNewState();
         DoStateLogic();
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-//             print("RESETING");
-//             reset = false;
-//             MyUtils.Time.SetTimeout(() => {
-//                 reset = false;
-//             }, 0.2f, this);
+            //inventoryComponent.SetEquipped(weapon);
+            print(weaponPickuper.GetNearestWeapon().gameObject.name);
         }
 
     }

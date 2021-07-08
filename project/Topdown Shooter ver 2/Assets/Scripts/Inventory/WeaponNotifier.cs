@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class WeaponPickuper : MonoBehaviour
+public class WeaponNotifier : MonoBehaviour
 {
 
     [SerializeField] private float PickupRadius = 3f;
