@@ -8,7 +8,7 @@ public class WeaponPickuper : MonoBehaviour
 {
     [SerializeField] private int MaxNearWeapons = 10;
     
-    private List<WeaponBase> nearWeapons;
+    private List<WeaponDropBase> nearWeapons;
 
     
     private WeaponNotifier weaponNotifier;
@@ -16,10 +16,11 @@ public class WeaponPickuper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nearWeapons = new List<WeaponBase>(MaxNearWeapons);
+        nearWeapons = new List<WeaponDropBase>(MaxNearWeapons);
         weaponNotifier = GetComponent<WeaponNotifier>();
         // Subscribe
         weaponNotifier.OnWeaponEnter += OnWeaponEnter;
+        weaponNotifier.OnWeaponExit += OnWeaponExit;
     }
 
     
@@ -28,6 +29,13 @@ public class WeaponPickuper : MonoBehaviour
     {
         // Unsubscribe
         weaponNotifier.OnWeaponEnter -= OnWeaponEnter;
+        weaponNotifier.OnWeaponExit -= OnWeaponExit;
+
+    }
+
+    private void OnWeaponExit(WeaponDropBase weapon)
+    {
+        nearWeapons.Remove(weapon);
     }
 
 
@@ -35,23 +43,23 @@ public class WeaponPickuper : MonoBehaviour
     void Update()
     {
         Vector2 distance = new Vector2();
-        WeaponBase nearest = GetNearestWeapon(out distance);
+        WeaponDropBase nearest = GetNearestWeapon(out distance);
         if (distance.sqrMagnitude <= 3 * 3)
         {
             // Notify the whatever input system is
         }
     }
 
-    private void OnWeaponEnter(WeaponBase weapon)
+    private void OnWeaponEnter(WeaponDropBase weapon)
     {
         if (nearWeapons.Count >= MaxNearWeapons)
             nearWeapons.RemoveAt(0);
         nearWeapons.Add(weapon);
     }
 
-    public WeaponBase GetNearestWeapon(out Vector2 distanceOfNearest)
+    public WeaponDropBase GetNearestWeapon(out Vector2 distanceOfNearest)
     {
-        WeaponBase nearest = GetNearestWeapon();
+        WeaponDropBase nearest = GetNearestWeapon();
         if (nearest != null)
         {
             distanceOfNearest = (nearest.gameObject.transform.position - transform.position);
@@ -60,22 +68,17 @@ public class WeaponPickuper : MonoBehaviour
             distanceOfNearest = new Vector2();
         return nearest;
     }
-    public WeaponBase GetNearestWeapon()
+    public WeaponDropBase GetNearestWeapon()
     {
         if (nearWeapons.Count <= 0)
             return null;
 
-        WeaponBase nearest = nearWeapons[0];
+        WeaponDropBase nearest = nearWeapons[0];
         Vector2 distanceOfNearest = (nearest.gameObject.transform.position - transform.position);
         for (int i = 1; i < nearWeapons.Count - 1; i++)
         {
-            WeaponBase iWeapon = nearWeapons[i];
+            WeaponDropBase iWeapon = nearWeapons[i];
             Vector2 distanceOfI = (iWeapon.gameObject.transform.position - transform.position);
-            if (distanceOfI.sqrMagnitude > 3 * 3)
-            {
-                nearWeapons.RemoveAt(i);
-                continue;
-            }
             distanceOfNearest = (nearest.gameObject.transform.position - transform.position);
             if (distanceOfI.sqrMagnitude < distanceOfNearest.sqrMagnitude)
                 nearest = iWeapon;

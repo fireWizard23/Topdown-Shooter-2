@@ -37,9 +37,9 @@ public class PlayerController : MonoBehaviour
     //}
 
 
-    private void OnWeaponEnter(WeaponBase weapon)
+    private void OnWeaponEnter(WeaponDropBase weapon)
     {
-        print(weapon != null);
+        //print(weapon != null);
     }
 
     void Update()
@@ -50,7 +50,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             //inventoryComponent.SetEquipped(weapon);
-            print(weaponPickuper.GetNearestWeapon().gameObject.name);
+            //print((weaponPickuper.GetNearestWeapon().transform.position - transform.position).magnitude);
+            WeaponDropBase weapon = weaponPickuper.GetNearestWeapon();
+            if (weapon != null)
+                inventoryComponent.SetEquipped(weapon);
         }
 
     }

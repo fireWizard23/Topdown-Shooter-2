@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae2738432a1ff843a6b6902bd22d591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PickupRadius: 1
+  PickupRadius: 1.5
   PickupMask:
     serializedVersion: 2
     m_Bits: 1

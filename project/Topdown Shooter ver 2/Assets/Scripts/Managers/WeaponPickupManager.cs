@@ -5,7 +5,7 @@ using System;
 
 public class WeaponPickupManager : MonoBehaviour
 {
-    public static void DetermineWeapon(WeaponBase weapon)
+    public static void DetermineWeapon(WeaponDropBase weapon)
     {
 
     }

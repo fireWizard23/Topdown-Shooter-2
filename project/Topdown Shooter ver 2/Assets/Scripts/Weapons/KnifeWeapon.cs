@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnifeWeapon : WeaponBase
+public class KnifeWeapon : WeaponDropBase
 {
 
     public override void Attack()
